@@ -1,0 +1,4 @@
+name: ctgParticles
+version: '1.0-SNAPSHOT'
+main: org.tallfly.ctgparticles.CtgParticles
+api-version: 1.19
