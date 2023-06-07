@@ -1,30 +1,34 @@
 package org.tallfly.ctgparticles;
 
 import org.bukkit.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
+import java.util.Objects;
 
 public final class CtgParticles extends JavaPlugin {
-
+    private int particlesCount = 10;
     @Override
     public void onEnable() {
+        Bukkit.getPluginCommand("setparticles").setExecutor(this);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, ()-> {
-            for(Player sans: Bukkit.getOnlinePlayers()){
-                createParticles(sans.getLocation().add(0,8,0), 10, 3);
-                createParticles(sans.getLocation().add(0,6,0), 25, 5);
-                createParticles(sans.getLocation().add(0,4,0), 20, 4);
-                createParticles(sans.getLocation().add(0,2,0), 15, 6);
-                createParticles(sans.getLocation().add(0,0,0), 15, 2);
-                createParticles(sans.getLocation().add(0,-2,0), 10, 4);
+            for(Player player: Bukkit.getOnlinePlayers()){
+                if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
+                    createParticles(player.getLocation().add(0, 8, 0), 10, particlesCount);
+                    createParticles(player.getLocation().add(0, 6, 0), 25, particlesCount);
+                    createParticles(player.getLocation().add(0, 4, 0), 20, particlesCount);
+                    createParticles(player.getLocation().add(0, 2, 0), 15, particlesCount);
+                    createParticles(player.getLocation().add(0, 0, 0), 15, particlesCount);
+                    createParticles(player.getLocation().add(0, -2, 0), 10, particlesCount);
+                }
             }
-        }, 20,30);
-        // Plugin startup logic
+        }, 20,20);
 
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
     private void createParticles(Location center, int radius, int particles) {
@@ -39,5 +43,30 @@ public final class CtgParticles extends JavaPlugin {
             Location particleLocation = new Location(world, x, y, z);
             world.spawnParticle(Particle.FIREWORKS_SPARK, particleLocation, 1, 0,0,0, 0);
         }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("setparticles")) {
+            if (args.length != 1) {
+                player.sendMessage(ChatColor.RED + "Использование: /setparticles <количество>");
+                return true;
+            }
+
+            int particles;
+            try {
+                particles = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                player.sendMessage(ChatColor.RED + "Некорректное значение для количества частиц.");
+                return true;
+            }
+
+            particlesCount = particles;
+
+            player.sendMessage(ChatColor.GREEN + "Количество частиц успешно установлено на " + particles + ".");
+            return true;
+        }
+
+        return false;
     }
 }

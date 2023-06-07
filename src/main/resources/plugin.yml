@@ -2,3 +2,6 @@ name: ctgParticles
 version: '${project.version}'
 main: org.tallfly.ctgparticles.CtgParticles
 api-version: 1.19
+commands:
+  setparticles:
+    description: "Change density of particles"
