@@ -52,18 +52,18 @@ public final class CtgParticles extends JavaPlugin {
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("setparticles")) {
             if (!(player instanceof Player)) {
-                player.sendMessage(ChatColor.RED + "Команду можно использовать только в игре.");
+                player.sendMessage(ChatColor.RED + "The command can only be used in the game.");
                 return true;
             }
 
             Player user = (Player) player;
             if (!user.isOp()) {
-                player.sendMessage(ChatColor.RED + "У вас нет доступа к этой команде.");
+                player.sendMessage(ChatColor.RED + "You do not have access to this command.");
                 return true;
             }
 
             if (args.length == 0) {
-                player.sendMessage(ChatColor.RED + "Использование: /setparticles [type | amount | setWorld]");
+                player.sendMessage(ChatColor.RED + "Usage: /setparticles [type | amount | setWorld]");
                 return true;
             }
 
@@ -71,25 +71,25 @@ public final class CtgParticles extends JavaPlugin {
                 if (args[0].equalsIgnoreCase("type")) {
                     try {
                         particlesType = Particle.valueOf(args[1].toUpperCase());
-                        player.sendMessage(ChatColor.GREEN + "Тип частиц изменен на " + particlesType);
+                        player.sendMessage(ChatColor.GREEN + "Particle type changed to " + particlesType);
                     } catch (IllegalArgumentException e) {
-                        player.sendMessage(ChatColor.RED + "Некорректный тип частиц.");
+                        player.sendMessage(ChatColor.RED + "Incorrect particle type.");
                         return true;
                     }
                 } else if (args[0].equalsIgnoreCase("amount")){
                     try {
                         particlesCount = Integer.parseInt(args[1]);
-                        player.sendMessage(ChatColor.GREEN + "Количество частиц изменено на " + particlesCount);
+                        player.sendMessage(ChatColor.GREEN + "Particle amount changed to " + particlesCount);
                     } catch (NumberFormatException e) {
-                        player.sendMessage(ChatColor.RED + "Некорректное количество частиц.");
+                        player.sendMessage(ChatColor.RED + "Incorrect amount of particles.");
                         return true;
                     }
                 } else if (args[0].equalsIgnoreCase("setWorld")){
                     try {
                         dimensionType = World.Environment.valueOf(args[1].toUpperCase());
-                        player.sendMessage(ChatColor.GREEN + "Мир для появления частиц изменен на " + dimensionType);
+                        player.sendMessage(ChatColor.GREEN + "Particle spawn world changed to " + dimensionType);
                     } catch (IllegalArgumentException e) {
-                        player.sendMessage(ChatColor.RED + "Некорректное название мира.");
+                        player.sendMessage(ChatColor.RED + "Incorrect world name.");
                         return true;
                     }
                 }
