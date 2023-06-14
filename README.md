@@ -1,10 +1,13 @@
 # ctgParticles
-## Этот плагин спавнит вокруг игрока частицы, создавая некую "эстетичность" Энду.
+## This plugin will spawn particles around the player, creating some kind of aesthetic.
 
 ![image](https://github.com/t4llfly/ctgParticles/assets/117188933/a76eb4a8-f169-46bd-a57f-041b3a6aaa19)
 
-### Какие частицы можно использовать?
-**Полный список:** (я не проверял все эффекты, возможно какие-то работают некорректно. Об этом сообщайте в Issues)
+
+### Where to download?
+You can download plugin from releases tab or from [SpigotMC](https://www.spigotmc.org/resources/ctgparticles.110476/)
+### What particles can be used?
+**Full list**: (I haven't tested all the effects, maybe some don't work correctly. Report it in Issues)
 ```
 * EXPLOSION_NORMAL,
 * EXPLOSION_LARGE,
